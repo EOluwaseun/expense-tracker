@@ -8,8 +8,8 @@ import {
 
 const router = express.Router();
 
-router.get('/:id', authMiddleware, getAccount);
-router.put('/create', authMiddleware, createAccount);
+router.get('/:id?', authMiddleware, getAccount);
+router.post('/create', authMiddleware, createAccount);
 router.put('/add-money/:id', authMiddleware, addMoneyToAccount);
 
 export default router;
