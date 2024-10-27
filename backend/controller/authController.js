@@ -12,7 +12,6 @@ export const signupUser = async (req, res) => {
         message: 'Provide Required Field',
       });
     }
-
     const userExist = await pool.query({
       //select it if it exist
       text: 'SELECT EXISTS (SELECT * FROM tbluser WHERE email = $1)',

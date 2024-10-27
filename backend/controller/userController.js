@@ -16,7 +16,7 @@ export const getUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         status: 'failed',
-        message: 'User nott found.',
+        message: 'User not found.',
       });
     }
     user.password = undefined;

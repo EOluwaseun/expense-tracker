@@ -24,3 +24,21 @@ export const comparePassword = async (userPassword, password) => {
 export const createJWT = (id) => {
   return JWT.sign({ userId: id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 };
+
+export function getMonthName(index) {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  return months[index];
+}
