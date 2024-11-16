@@ -80,10 +80,10 @@ export const signinUser = async (req, res) => {
     const token = createJWT(user.id);
     user.password = undefined;
 
-    res.status(404).json({
+    res.status(200).json({
       user: user,
       status: 'success',
-      message: 'User login succsessfully',
+      message: 'User logged succsessfully',
       token,
     });
   } catch (error) {
