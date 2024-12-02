@@ -45,7 +45,7 @@ function SignUp() {
 
   // navigate
   const navigate = useNavigate();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     //if user already login, then always take back to home page

@@ -39,3 +39,20 @@
 .switch.light .ball {
   transform: translateX(2px);
 }
+
+/* @layer components {
+  .inputStyle {
+    @apply appearance-none border-gray-300;
+  }
+} */
+.inputStyle {
+  @apply bg-transparent appearance-none border-gray-300 appearance-none 
+  dark:border-gray-300 rounded w-full py-2 px-3 dark:text-gray-200 text-gray-500 outline-none focus:ring-1 ring-blue-500 dark:placeholder:text-gray-200;
+}
+
+.labelStyles {
+  @apply block text-gray-500 dark:text-gray-200 text-sm md:text-base mb-2;
+}
+.input-style {
+  @apply w-full text-sm border dark:border-gray-800 dark:bg-transparent dark:text-gray-200 dark:placeholder:text-gray-200 p-2 outline-none;
+}

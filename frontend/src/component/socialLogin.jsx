@@ -78,9 +78,9 @@ export const SocialLogin = ({ isLoading, setIsLoading }) => {
         {isLoading ? (
           <BiLoader className="text-2xl animate-spin text-white" />
         ) : (
-          <div>
+          <div className="flex items-center justify-center gap-2">
             <img src={google} className="w-5 mr-3" />
-            `` Continue with google
+            Continue with google
           </div>
         )}
       </Button>

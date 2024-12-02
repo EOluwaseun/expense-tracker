@@ -1,39 +1,40 @@
-import {
-  BiArrowFromBottom,
-  BiArrowFromTop,
-  BiMoneyWithdraw,
-} from 'react-icons/bi';
+import { BiMoneyWithdraw } from 'react-icons/bi';
 import { MdCurrencyPound, MdMoney } from 'react-icons/md';
-
-const data = [
-  {
-    label: 'Your Total Balance',
-    amount: '100,020.00',
-    increase: 10.0,
-    icon: <MdCurrencyPound size={26} />,
-  },
-  {
-    label: 'Your Income',
-    amount: '150,010.00',
-    increase: 8.0,
-    icon: <MdMoney size={26} />,
-  },
-  {
-    label: 'Your Expenses',
-    amount: '150,010.00',
-    increase: -0.8,
-    icon: <BiMoneyWithdraw size={26} />,
-  },
-];
+import { formatCurrency } from '../common';
 
 const ICON_STYLES = [
   'bg-blue-300 text-blue-800',
   'bg-emerald-300 text-emerald-800',
   'bg-rose-300 text-rose-800',
 ];
-function Stat() {
+// eslint-disable-next-line react/prop-types
+function Stat({ dt }) {
+  const data = [
+    {
+      label: 'Total Balance',
+      // eslint-disable-next-line react/prop-types
+      amount: dt?.balance,
+      increase: 10.0,
+      icon: <MdCurrencyPound size={26} />,
+    },
+    {
+      label: 'Income',
+      // amount: '150,010.00',
+      // eslint-disable-next-line react/prop-types
+      amount: dt?.income,
+      increase: 8.0,
+      icon: <MdMoney size={26} />,
+    },
+    {
+      label: 'Expenses',
+      // eslint-disable-next-line react/prop-types
+      amount: dt?.expense,
+      increase: -0.8,
+      icon: <BiMoneyWithdraw size={26} />,
+    },
+  ];
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-8 2xl:gap-40 mb20">
+    <div className="flex flex-col md:flex-row items-center justify-between gap-8 2xl:gap-30 mb-20">
       {data.map((item, index) => {
         return (
           <div
@@ -45,28 +46,37 @@ function Stat() {
               <div
                 className={`w-12 h-12 flex items-center justify-center rounded-full ${ICON_STYLES[index]}`}
               >
-                {item.icon}
+                {item?.icon}
               </div>
               <div className="space-y-3">
                 <span className="text-gray-600 dark:text-gray-400 text-base md:text-lg">
-                  {item.label}
+                  {item?.label}
                 </span>
                 <p className="text-2xl 2xl:text-3xl font-medium text-black dark:text-gray-400">
-                  %{item.amount}
+                  {formatCurrency(item?.amount || 0.0)}
                 </p>
+                <span className="text-xs text-gray-600 md:text-sm 2xl:text-base dark:text-gray-500">
+                  Overall {item.label}
+                </span>
               </div>
             </div>
-            <div>
+            {/* <div>
               <p
                 className={`flex gap-1 items-center text-base md:text-lg font-semibold ${
-                  item.increase > 0 ? 'text-emerald-500' : 'text-red-500'
+                  item?.increase > 0 ? 'text-emerald-500' : 'text-red-500'
                 }`}
               >
-                {item.increase > 0 ? <BiArrowFromBottom /> : <BiArrowFromTop />}
-                {Math.abs(item.increase)}%{/* remove - symbol */}
+                {item?.increase > 0 ? (
+                  <BiArrowFromBottom />
+                ) : (
+                  <BiArrowFromTop />
+                )}
+                {Math.abs(item.increase)}%
               </p>
-              <span>Compare to last year</span>
-            </div>
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-500">
+                Compare to last year
+              </span>
+            </div> */}
           </div>
         );
       })}

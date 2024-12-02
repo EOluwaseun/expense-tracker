@@ -2,15 +2,32 @@ import { useState } from 'react';
 import { RiCurrencyLine, RiProfileFill } from 'react-icons/ri';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import ThemeSwitch from './ThemeSwitch';
+import { Link } from 'react-router-dom';
 
-const links = ['Dashboard', 'Transactions', 'Accounts', 'Settings'];
+const links = [
+  {
+    name: 'Dashboard',
+    link: '',
+  },
+  {
+    name: 'Transactions',
+    link: 'transactions',
+  },
+  {
+    name: 'Accounts',
+    link: 'accounts',
+  },
+  {
+    name: 'Settings',
+    link: 'settings',
+  },
+];
 
 const Navbar = () => {
-  // eslint-disable-next-line no-undef
   const [selected, setSelected] = useState(0);
 
   return (
-    <nav className="w-full flex items-center justify-between py-6">
+    <nav className="w-full flex items-center justify-between py-6 px-2 md:px-20">
       <div className="flex items-center gap-2 cursor-pointer">
         <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-violet-700 rounded-xl">
           <RiCurrencyLine className="text-white text-3xl hover:animate-spin" />
@@ -31,7 +48,8 @@ const Navbar = () => {
               } px-6 py-2`}
               onClick={() => setSelected(index)}
             >
-              <a href="#">{link}</a>
+              <Link to={`/${link.link}`}>{link.name}</Link>
+              {/* <a href={`${link.link}`}>{link.name}</a> */}
             </div>
           );
         })}

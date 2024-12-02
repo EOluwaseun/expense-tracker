@@ -9,34 +9,47 @@ import Transaction from './pages/Transaction';
 import useStore from './store';
 import { setAuthToken } from './common/apiCall';
 import { Toaster } from 'sonner';
+import Navbar from './component/Navbar';
+import { useEffect } from 'react';
 
+const RootLayout = () => {
+  // console.log(user);
+  const { user } = useStore((state) => state);
+  setAuthToken(user?.token || '');
+  return !user ? (
+    <Navigate to="sign-in" replace={true} />
+  ) : (
+    <>
+      <Navbar />
+      <div className="min-h-[calc(h-screen-100px)]">
+        <Outlet />
+      </div>
+    </>
+  );
+};
 function App() {
   // const theme = useStore()';
-  const { user, theme } = useStore((state) => state);
-  const RootLayout = () => {
-    // console.log(user);
-    setAuthToken(user?.token || '');
-    return !user ? (
-      <Navigate to="sign-in" replace={true} />
-    ) : (
-      <>
-        <div className="min-h-[calc(h-screen-100px)]">
-          <Outlet />
-        </div>
-      </>
-    );
-  };
+  const { theme } = useStore((state) => state);
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [theme]);
+
   return (
-    <main className={theme}>
+    <main>
       <div className="w-full min-h-screen bg-gray-100 dark:bg-slate-900">
         <Routes>
           <Route element={<RootLayout />}>
             {/* protected route */}
             <Route path="/" element={<Navigate to={'/overview'} />} />
             <Route path="/overview" element={<Dashboard />} />
-            <Route path="/transactions" element={<Transaction />} />
+            <Route path="transactions" element={<Transaction />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/account" element={<AccountPage />} />
+            <Route path="/accounts" element={<AccountPage />} />
           </Route>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
